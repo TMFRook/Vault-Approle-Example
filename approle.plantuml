@@ -1,0 +1,21 @@
+@startuml
+
+title AppRole
+participant Jenkins as j
+participant "broker-sync" as b
+participant Vault as v
+j -> v: Give me wrapped secret-id
+v -> j: Wrapped secret-id
+
+...
+
+j -> b: Startup (provides: RoleId, Wrapped secret-id)
+b -> v: Give me secret-id (provide: wrapped secret-id)
+v -> v: Delete wrapped secret-id.
+v -> b: Here's the secret-id
+b -> v: Login (provide: RoleId, SecretId)
+v -> b: Here's your login token
+b -> v: Give me secret/fooluid (provide: login token)
+v -> b: Here's secret/fooluid
+
+@enduml

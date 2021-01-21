@@ -1,0 +1,10 @@
+@startuml
+
+title AppRole Setup
+participant Admin as a
+participant Vault as v
+
+a -> v: Create policy
+a -> v: Create Role based on policy
+
+@enduml

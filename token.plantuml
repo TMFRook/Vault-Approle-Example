@@ -1,0 +1,13 @@
+@startuml
+
+title Token Auth
+participant Jenkins as j
+participant "broker-sync" as b
+participant Vault as v
+
+j -> b: Startup (provides: login token)
+b -> v: Give me secret/fooluid (provide: login token)
+v -> b: Here's secret/fooluid
+
+
+@enduml
