@@ -36,7 +36,7 @@
   - name: Get Wrapped Secret ID from Vault
     become: yes
     uri:
-      url: http://172.20.20.10:8200/v1/auth/approle/role/{{RoleName}}/secret-id
+      url: http://127.0.0.1:8200/v1/auth/approle/role/{{RoleName}}/secret-id
       method: POST
       status_code: 200
       headers:
