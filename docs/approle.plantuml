@@ -1,0 +1,24 @@
+@startuml
+
+title AppRole
+participant Jenkins as j
+participant "broker-sync" as b
+participant Vault as v
+j -> v: Give me secret-id
+' secret_id_ttl=120
+' secret_id_num_uses=1
+' secret_id_bound_cidrs=CIDR of application
+' token_bound_cidrs=CIDR of applications
+' token_explicit_max_ttl=?
+v -> j: secret-id
+
+...
+
+j -> b: Startup (provides: RoleId, secret-id)
+b -> v: Login (provide: RoleId, SecretId)
+v -> v: Destroy secret id
+v -> b: Here's your token
+b -> v: Give me secret/fooluid (provide: login token)
+v -> b: Here's secret/fooluid
+
+@enduml

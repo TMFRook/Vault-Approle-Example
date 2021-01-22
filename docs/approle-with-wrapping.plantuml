@@ -14,8 +14,9 @@ b -> v: Give me secret-id (provide: wrapped secret-id)
 v -> v: Delete wrapped secret-id.
 v -> b: Here's the secret-id
 b -> v: Login (provide: RoleId, SecretId)
-v -> b: Here's your login token
-b -> v: Give me secret/fooluid (provide: login token)
+v -> v: Delete secret id
+v -> b: Here's your token
+b -> v: Give me secret/fooluid (provide: token)
 v -> b: Here's secret/fooluid
 
 @enduml
