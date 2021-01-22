@@ -12,12 +12,18 @@ load_dotenv(override=True)
 load_dotenv(dotenv_path)
 roleID = os.getenv("RoleID")
 wsid = os.getenv("WSID")
+
+print(f"ROLEID: {roleID}, wsid: {wsid}")
+
 url = 'http://127.0.0.1:8200/v1/sys/wrapping/unwrap'
 headers = {
     'X-Vault-Token': wsid
 }
 response = requests.post(url, headers=headers)
 resp_dict = response.json()
+
+print(resp_dict)
+
 sid=resp_dict['data']['secret_id']
 print("Secret ID is:" +sid)
 
@@ -26,17 +32,23 @@ def hello():
 
     url = 'http://127.0.0.1:8200/v1/auth/approle/login'
     data = {'role_id': roleID, 'secret_id': sid}
+    print(f"data: {data}")
     response2 = requests.post(url, data=json.dumps(data).encode("utf-8"))
     resp_dict2 = response2.json()
+
+    print(resp_dict2)
     token=resp_dict2['auth']['client_token']
     print("Token is:" +token)
 
-    url = 'http://127.0.0.1:8200/v1/GDL/Demo/Hello'
+    url = 'http://127.0.0.1:8200/v1/secret/Demo/Hello'
     headers = {
         'X-Vault-Token': token
     }
     response3 = requests.get(url, headers=headers)
     resp_dict3 = response3.json()
+
+    print(f"resp_dict3: {resp_dict3}")
+
     secret=resp_dict3['data']['World']
     print("Secret is:" +secret)
 
